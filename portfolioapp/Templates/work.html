@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .left{
+        margin-right: 30%;
+    }
+    .top {
+        width: 100%;
+        height: 20px;
+    }
+    .ll {
+    width: 100%;
+    height: 237px;
+    border-radius: 13px;
+    margin-left: 30%;
+}
+    .mo1{
+        display: flex;
+    }
+    .jj {
+    width: 100%;
+    height: 237px;
+    border-radius: 13px;
+}
+.para{
+    margin-left: 30%;
+    font-size: x-large;
+}
+.para1{
+    font-size: x-large;
+}
+button {
+    color: #ff6883;
+    background-color: #14161917;
+    border-radius: 45px;
+    border-color: #ffffff94;
+    font-size: larger;
+}
+    
+</style>
+
+<body>
+    <div class="mo">
+        <div class="top"></div>
+        <center>
+            <h1 style="margin-bottom: 30px;">Recent Work</h1>
+        </center>
+        <div class="mo1">
+        <div class="left">
+            <img src="https://res.cloudinary.com/prince04/image/upload/v1664013844/newpic_mq7mks.jpg" class="ll">
+            <p class="para">Blog Website</p>
+            <a href="https://blogweb04.herokuapp.com/"><button type="button" style="margin-left:30% ;">View Website</button></a><a href="{% url 'project' %}"><button type="button" style="margin-left: 40px;">View Project</button></a>
+        </div>
+
+        
+        <div class="right">
+            <img src="https://res.cloudinary.com/prince04/image/upload/v1664115605/newop_fs6hrd.jpg" class="jj">
+            <p class="para1">Personal Portfolio Website</p>
+            <a href="#"><button type="button"">View Website</button></a><a href="{% url 'project2' %}"><button type="button" style="margin-left: 40px;">View Project</button></a>
+        </div>
+    </div>
+    </div>
+
+
+</body>
+{% endblock content %}
