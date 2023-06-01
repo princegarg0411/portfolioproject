@@ -1,0 +1,604 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .mo {
+        display: flex;
+        height: auto;
+    }
+
+    .bubbles {
+        height: 1660px;
+    }
+
+    .left {
+        width: 40%;
+        height: 100%;
+    }
+
+    .right {
+        width: 60%;
+    }
+
+    .op {
+        width: 100%;
+        height: 20px;
+    }
+
+    .po {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+
+    button.ff {
+        border-color: #ffffff00;
+        border-radius: 45px;
+        margin-right: 14px;
+        margin-bottom: 30px;
+    }
+
+
+    /* ---------------------
+   About Section Starts
+   --------------------- */
+    .about-section {
+        /* background-color: red; */
+        padding: 80px 0 0;
+        min-height: 100vh;
+    }
+
+    .about-section .about-img {
+        /* background-color: blue; */
+        flex: 0 0 40%;
+        max-width: 30%;
+        padding: 0 15px;
+        margin-left: 70px;
+    }
+
+    .about-section .about-img .img-box {
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+    .about-section .about-img .img-box img {
+        width: 100%;
+        border: 10px solid transparent;
+        border-radius: 5px;
+    }
+
+    .about-section .about-img .social-links {
+        /* background-color: red; */
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .about-section .about-img .social-links a {
+        padding: 5px;
+        display: inline-block;
+        height: 40px;
+        width: 40px;
+        font-size: 16px;
+        text-align: center;
+        color: var(--text-black-600);
+        margin: 0 4px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    .about-section .timeline .timeline-item-inner svg,
+    .about-section .about-img .social-links a svg {
+        line-height: 40px;
+    }
+
+    .about-section .about-img .social-links a::after {
+        border-radius: 50%;
+    }
+
+    .about-section .about-img .social-links a:hover {
+        color: var(--skin-color-1);
+    }
+
+    .about-section .about-info {
+        /* background-color: red; */
+        flex: 0 0 60%;
+        max-width: 70%;
+        padding: 0 15px;
+    }
+
+    .about-section .about-info p {
+        font-size: 16px;
+        line-height: 26px;
+        margin-bottom: 15px;
+        color: var(--text-black-600);
+    }
+
+    .about-section .about-info span {
+        font-weight: 600;
+    }
+
+    .about-section .about-info .btn-1 {
+        margin: 30px 20px 0 0;
+    }
+
+    .about-section .about-tabs {
+        /* background-color: red; */
+        padding: 60px 15px 60px;
+        flex: 0 0 100%;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .about-section .about-tabs .tab-item {
+        /* border: 1px solid red; */
+        display: inline-block;
+        margin: 0 5px 10px;
+        cursor: pointer;
+        padding: 5px 10px;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        font-size: 16px;
+        color: var(--text-black-600);
+        font-weight: 500;
+        text-transform: capitalize;
+    }
+
+    .about-section .about-tabs .tab-item:hover:not(.active) {
+        opacity: 0.6;
+    }
+
+    .about-section .about-tabs .tab-item.active {
+        color: var(--skin-color-1);
+    }
+
+    .about-section .tab-content {
+        /* background-color: red; */
+        flex: 0 0 100%;
+        max-width: 100%;
+        display: none;
+    }
+
+    .about-section .tab-content.active {
+        display: block;
+        animation: fadeInTop 0.5s ease;
+    }
+
+    .about-section .skills {
+        padding: 0 0 40px;
+    }
+
+    .about-section .skills .skill-item {
+        flex: 0 0 50%;
+        max-width: 50%;
+        padding: 0 15px;
+        margin-bottom: 40px;
+    }
+
+    .about-section .skills .skill-item p {
+        font-size: 16px;
+        color: var(--text-black-600);
+        text-transform: capitalize;
+        margin: 0 0 10px;
+    }
+
+    .about-section .skills .skill-item .progress {
+        height: 20px;
+        border-radius: 10px;
+        position: relative;
+    }
+
+    .about-section .skills .skill-item .progress-bar {
+        background-color: var(--text-black-600);
+        height: 6px;
+        left: 7px;
+        top: 7px;
+        position: absolute;
+        border-radius: 10px;
+    }
+
+    .about-section .skills .skill-item .progress-bar span {
+        /* display: none; */
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--text-black-600);
+        margin-top: -40px;
+    }
+
+    .about-section .experience,
+    .about-section .education {
+        padding-bottom: 80px;
+    }
+
+    .about-section .timeline {
+        /* background-color: red; */
+        flex: 0 0 100%;
+        max-width: 100%;
+        position: relative;
+    }
+
+    .about-section .timeline::before {
+        content: "";
+        width: 1px;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        background-color: var(--bg-black-100);
+        position: absolute;
+    }
+
+    .about-section .timeline .timeline-item {
+        /* background-color: red; */
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    .about-section .timeline .timeline-item:nth-child(odd) {
+        padding-right: calc(50% + 50px);
+        text-align: right;
+    }
+
+    .about-section .timeline .timeline-item:nth-child(even) {
+        padding-left: calc(50% + 50px);
+    }
+
+    .about-section .timeline .timeline-item-inner {
+        padding: 30px;
+        border-radius: 5px;
+        position: relative;
+    }
+
+    .about-section .timeline .timeline-item-inner::before {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 1px;
+        background-color: var(--bg-black-100);
+        top: 37px;
+        z-index: -1;
+    }
+
+    .about-section .timeline .timeline-item:nth-child(odd) .timeline-item-inner::before {
+        right: -30px;
+    }
+
+    .about-section .timeline .timeline-item:nth-child(even) .timeline-item-inner::before {
+        left: -30px;
+    }
+
+    .about-section .timeline .timeline-item-inner .icon {
+        height: 40px;
+        width: 40px;
+        /* background-color: red; */
+        background-color: var(--bg-black-50);
+        border: 1px solid var(--bg-black-100);
+        text-align: center;
+        line-height: 36px;
+        border-radius: 50%;
+        font-size: 16px;
+        color: var(--skin-color-1);
+        position: absolute;
+        top: 18px;
+    }
+
+    .about-section .timeline .timeline-item:nth-child(odd) .icon {
+        right: -70px;
+    }
+
+    .about-section .timeline .timeline-item:nth-child(even) .icon {
+        left: -70px;
+    }
+
+    .about-section .timeline .timeline-item-inner span {
+        font-weight: 500;
+        color: var(--skin-color-1);
+        display: block;
+        margin: 0 0 10px;
+        text-transform: capitalize;
+    }
+
+    .about-section .timeline .timeline-item-inner h3 {
+        font-size: 20px;
+        color: var(--text-black-700);
+        font-weight: 600;
+        margin: 0 0 5px;
+        text-transform: capitalize;
+    }
+
+    .about-section .timeline .timeline-item-inner h4 {
+        font-size: 16px;
+        font-style: italic;
+        color: var(--text-black-600);
+        margin: 0;
+    }
+
+    .about-section .timeline .timeline-item-inner p {
+        font-size: 16px;
+        color: var(--text-black-600);
+        line-height: 26px;
+        margin: 15px 0 0;
+    }
+    
+
+    /* ---------------------
+     About Section Ends
+     --------------------- */
+     @media screen and (min-width:320px) and (max-width:576px) {
+        .about-section .about-img {
+    flex: 1 0 40%;
+    max-width: 64%;
+    padding: 5px 15px;
+    margin-left: 60px;
+}
+.row{
+    display: block;
+}
+.about-section .about-info {
+    max-width: 100%;
+    padding-top: 20px;
+}
+.about-section .skills .skill-item {
+    max-width: 90%;
+}
+     }
+</style>
+
+<body>
+    <div class="mo">
+        <!-- About Section Starts -->
+        <section class="about-section section" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="section-title">
+                        <center><h2 data-heading="main info">About Me</h2></center>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="about-img">
+                        <div class="img-box inner-shadow">
+                            <img src="https://res.cloudinary.com/prince04/image/upload/v1664113246/DG1A5469_jxlbrm.jpg" alt="profile-pic" class="outer-shadow" />
+                        </div>
+                        <!-- Social Links Strats -->
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/prince._.garg04/" target="_blank"
+                                class="outer-shadow hover-in-shadow"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
+                                </svg></a>
+                            <a href="https://github.com/princegarg0411" target="_blank"
+                                class="outer-shadow hover-in-shadow"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                                </svg></a>
+                            <a href="https://www.facebook.com/profile.php?id=100061819953574" target="_blank"
+                                class="outer-shadow hover-in-shadow"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+                                </svg></a>
+                            <a href="mailto: princegarg0411@gmail.com" target="_blank"
+                                class="outer-shadow hover-in-shadow"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                    <path
+                                        d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+                                </svg></a>
+                        </div>
+                        <!-- Social Links Ends -->
+                    </div>
+                    <div class="about-info">
+                        <p>I've recently completed my Diploma in Computer Engineering. I am
+endeavoring to secure a Python Developer role and improve my knowledge
+of "Python and Django" to evolve as a successful Python and Django
+expertise Developer.</p><p>I am a hardworking person and always eager to learn new things.
+    I hope to be an asset for any organization.
+                        </p>
+                    </div>
+                </div>
+                <!-- About Tabs Starts -->
+                <div class="row">
+                    <div class="about-tabs">
+                        <span class="tab-item outer-shadow active" data-target=".skills">Skills</span>
+                        <span class="tab-item" data-target=".experience">Experience</span>
+                        <span class="tab-item" data-target=".education">Education</span>
+                    </div>
+                </div>
+                <!-- About Tabs Ends -->
+
+                <!-- Skills Starts -->
+                <div class="row">
+                    <div class="skills tab-content active">
+                        <div class="row">
+                            <!-- Skill Item Starts -->
+                            <div class="skill-item">
+                                <p>Python</p>
+                                <div class="progress inner-shadow">
+                                    <div class="progress-bar" style="width: calc(70% - 14px)">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Skill Item Ends -->
+                            <!-- Skill Item Starts -->
+                            <div class="skill-item">
+                                <p>D-Jango Framework</p>
+                                <div class="progress inner-shadow">
+                                    <div class="progress-bar" style="width: calc(70% - 14px)">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Skill Item Ends -->
+                            <!-- Skill Item Starts -->
+                            <div class="skill-item">
+                                <p>HTML</p>
+                                <div class="progress inner-shadow">
+                                    <div class="progress-bar" style="width: calc(70% - 14px)">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Skill Item Ends -->
+                            <!-- Skill Item Starts -->
+                            <div class="skill-item">
+                                <p>CSS</p>
+                                <div class="progress inner-shadow">
+                                    <div class="progress-bar" style="width: calc(60% - 14px)">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Skill Item Ends -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Skills Ends -->
+
+                <!-- Experience Starts -->
+                <div class="row">
+                    <div class="experience tab-content">
+                        <div class="row">
+                            <div class="timeline">
+                                <div class="row">
+                                    <!-- Timeline Item Starts -->
+                                    <div class="timeline-item">
+                                        <div class="timeline-item-inner outer-shadow">
+                                            <a href="" class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                    height="16" fill="currentColor" class="bi bi-briefcase"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5zm1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0zM1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5z" />
+                                                </svg></a>
+                                            <!-- <span>Month, Year - Year</span> -->
+                                            <h3>Fresher</h3>
+                                            <!-- <h4>Company name, India</h4> -->
+                                            <!-- <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing
+                        elit. Aperiam dolore exercitationem, provident porro
+                        quidem, soluta quis obcaecati dolorem ad perspiciatis
+                        eligendi, facere quisquam dolores error nulla harum
+                        ipsam assumenda consectetur.
+                      </p> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Experience Ends -->
+
+                <!-- Education Starts -->
+                <div class="row">
+                    <div class="education tab-content">
+                        <div class="row">
+                            <div class="timeline">
+                                <div class="row">
+                                    <!-- Timeline Item Starts -->
+                                    <div class="timeline-item">
+                                        <div class="timeline-item-inner outer-shadow">
+                                            <a href="" class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                    height="16" fill="currentColor" class="bi bi-mortarboard"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5ZM8 8.46 1.758 5.965 8 3.052l6.242 2.913L8 8.46Z" />
+                                                    <path
+                                                        d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46l-3.892-1.556Z" />
+                                                </svg></a>
+                                            <span>2018 - 2019</span>
+                                            <h3>Matriculation</h3>
+                                            <h4>Moti Ram Arya Sen. Sec. Model School</h4>
+                                            <h4>Sector - 27A, Chandigarh, India</h4>
+                                            <p>
+                                                Board: CBSE <br />
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- Timeline Item Ends -->
+
+                                    <!-- Timeline Item Starts -->
+                                    <div class="timeline-item">
+                                        <div class="timeline-item-inner outer-shadow">
+                                            <a href="" class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                height="16" fill="currentColor" class="bi bi-mortarboard"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5ZM8 8.46 1.758 5.965 8 3.052l6.242 2.913L8 8.46Z" />
+                                                <path
+                                                    d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46l-3.892-1.556Z" />
+                                            </svg></a>
+                                            <span>Aug, 2021 - Sep, 2021</span>
+                                            <h3>Industrial Training</h3>
+                                            <h4>Solitaire Infosys Pvt. Ltd.</h4>
+                                            <h4>Phase - 7, Mohali</h4>
+                                            <p>
+                                                Training Stream: Cloud Computing & Python <br />
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- Timeline Item Ends -->
+
+                                    <!-- Timeline Item Starts -->
+                                    <div class="timeline-item">
+                                        <div class="timeline-item-inner outer-shadow">
+                                            <a href="" class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                height="16" fill="currentColor" class="bi bi-mortarboard"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5ZM8 8.46 1.758 5.965 8 3.052l6.242 2.913L8 8.46Z" />
+                                                <path
+                                                    d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46l-3.892-1.556Z" />
+                                            </svg></a>
+                                            <span>Aug, 2019 - July, 2022</span>
+                                            <h3>Diploma</h3>
+                                            <h4>Govt. Polytechnic cum Multiskill Training Center</h4>
+                                            <h4> Sector - 26, Panchkula</h4>
+                                        </div>
+                                    </div>
+                                    <!-- Timeline Item Ends -->
+                                    <!-- Timeline Item Ends -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Education Ends -->
+            </div>
+        </section>
+        <!-- About Section Ends -->
+    </div>
+
+
+    <script>
+        // -------------------------------- About Section Tabs Starts -------------------------
+
+        (() => {
+            const aboutSection = document.querySelector(".about-section"),
+                tabsContainer = document.querySelector(".about-tabs");
+
+            tabsContainer.addEventListener("click", (event) => {
+                //   if event.target contains 'tab-item' class and not contains 'active' class
+                if (
+                    event.target.classList.contains("tab-item") &&
+                    !event.target.classList.contains("active")
+                ) {
+                    const target = event.target.getAttribute("data-target");
+                    //   deactivate existing active 'tab-item'
+                    tabsContainer
+                        .querySelector(".active")
+                        .classList.remove("outer-shadow", "active");
+                    // activate new 'tab-item'
+                    event.target.classList.add("active", "outer-shadow");
+                    //   deactivate existing active 'tab-content'
+                    aboutSection
+                        .querySelector(".tab-content.active")
+                        .classList.remove("active");
+                    // activate new 'tab-content'
+                    aboutSection.querySelector(target).classList.add("active");
+                }
+            });
+        })();
+
+  // -------------------------------- About Section Tabs Ends -------------------------
+    </script>
+</body>
+{% endblock content %}

@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<style>
+
+/* --------------------
+   Home Section Starts
+   -------------------- */
+
+   .home-section {
+    position: relative;
+  }
+  
+  .home-section .full-screen {
+    /* background-color: blue; */
+    padding: 50px 0;
+    min-height: 100vh;
+  }
+  
+  .home-section .home-text,
+  .home-section .home-img {
+    flex: 0 0 50%;
+    max-width: 100%;
+    padding: 0 15px;
+  }
+  
+  /* .home-section .home-text{
+    background-color: violet;
+  } */
+  
+  .home-section .home-text p {
+    color: #585050;
+    font-size: 18px;
+    text-transform: capitalize;
+    margin: 0;
+  }
+  
+  .home-section .home-text h2 {
+    font-size: 55px;
+    font-weight: 700;
+    color: var(--text-black-900);
+    margin: 0;
+  }
+  
+  .home-section .home-text h1 {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-black-600);
+    margin: 0;
+    text-transform: capitalize;
+  }
+  
+  .home-section .home-text .btn-1 {
+    margin-top: 30px;
+    margin-left: 10px;
+  }
+  
+  .home-section .home-img .img-box {
+    /* background-color: red; */
+    max-width: 450px;
+    display: block;
+    margin: auto;
+    border-radius: 50%;
+    padding: 15px;
+  }
+  
+  .home-section .home-img .img-box img {
+    width: 100%;
+    border-radius: 50%;
+    border: 10px solid transparent;
+  }
+  
+  /* --------------------
+     Home Section Ends
+     -------------------- */
+  
+@media screen and (min-width:320px) and (max-width:576px) {
+
+  .row{
+    display:inline;
+    align-items: center;
+    width: auto;
+  }
+  .home-img {
+    width: 240px;
+    height: auto;
+    position: absolute;
+    top: 70px;
+    right: 18%;
+}
+  
+.home-text {
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 389px;
+    left: 8%;
+}
+}
+</style>
+
+<body>
+  <div class="mo">
+    <section class="home-section section active" id="home">
+      <div class="container">
+        <div class="row full-screen align-items-center">
+          <div class="home-text">
+            <p>Hello</p>
+            <h2>I'm Prince Garg</h2>
+            <h1>Python Developer</h1>
+            <a href="{% url 'about' %}" class="link-item btn-1 outer-shadow hover-in-shadow">About Me</a>
+            <a href="https://drive.google.com/file/d/1yw1X8x5xNkuRDRjFadxWF-b2J11npGl-/view" class="link-item btn-1 outer-shadow hover-in-shadow">Portfolio</a>
+          </div>
+          <div class="home-img">
+            <div class="img-box inner-shadow">
+              <img src="https://res.cloudinary.com/prince04/image/upload/v1664113718/newmkef_wmjl4v.png" class="outer-shadow" alt="Profile-pic" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+
+</body>
+
+
+{% endblock content %}

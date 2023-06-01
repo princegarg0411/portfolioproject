@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .mo{
+        height: 1200px;
+    }
+    .bubbles{
+        height: 1200px;
+    }
+    .ll{
+        width: 90%;
+        margin-left:5% ;
+        margin-top: 3%;
+        border-radius: 15px;
+    }
+    .mi{
+        width: 90%;
+        margin-left: 5%;
+    }
+    @media screen and (min-width:320px) and (max-width:576px) {
+        .mo {
+    height: auto;
+}
+    }
+
+</style>
+<body>
+    <div class="mo">
+        <img src="https://res.cloudinary.com/prince04/image/upload/v1664115605/newop_fs6hrd.jpg" class="ll">
+        <div class="mi">
+            <b><p style="margin-top: 20px; font-size: xx-large;" >Personal Portfolio Website</b></p>
+            <p style="font-size: larger;">This website is of my personal portfolio i.e. About my education, my work experience, 
+            my skills and my working projects. </p>
+
+            <p style="font-size: larger;"><b style="font-size: xx-large;">Created -</b> 19 Sept 2022</p>
+            <b><p style="font-size: xx-large;">Technologies Used -</p></b>
+            <p style="font-size: larger;"> 1. Python <br>
+                2. Django <br>
+                3. HTML <br>
+                4. CSS <br>
+                5. Bootstrap
+            </p>
+
+            
+
+        </div>
+    </div>
+</body>
+{% endblock content %}

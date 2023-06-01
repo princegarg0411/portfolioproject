@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio</title>
+  {% load static %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+  <style>
+    /* ----------------
+   Fonts
+   ------------- */
+    @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap");
+
+    /* ----------------
+   Globals Starts
+   ---------------- */
+    /* defining custom css variables */
+    :root {
+      --bg-black-900: #000000;
+      --bg-black-100: #dddddd;
+      --bg-black-50: #eff0f4;
+      --bg-opacity: rgba(255, 255, 255, 0.5);
+      --text-black-900: #000000;
+      --text-black-700: #555555;
+      --text-black-600: #666666;
+      --text-black-300: #bbbbbb;
+      --outer-shadow: 3px 3px 3px #d0d0d0, -3px -3px 3px #f8f8f8;
+      --outer-shadow-0: 0 0 0 #d0d0d0, 0 0 0 #f8f8f8;
+      --inner-shadow: inset 3px 3px 3px #d0d0d0, inset -3px -3px 3px #f8f8f8;
+      --inner-shadow-0: inset 0 0 0 #d0d0d0, inset 0 0 0 #f8f8f8;
+    }
+
+    /* Overiding custom css variables for Dark Theme */
+    body.dark {
+      --bg-black-900: #ffffff;
+      --bg-black-100: #353535;
+      --bg-black-50: #2b2c2f;
+      --bg-opacity: rgba(43, 44, 47, 0.5);
+      --text-black-900: #ffffff;
+      --text-black-700: #ffffff;
+      --text-black-600: #bbbbbb;
+      --outer-shadow: 3px 3px 3px #222327, -3px -3px 3px #363636;
+      --outer-shadow-0: 0 0 0 #222327, 0 0 0 #363636;
+      --inner-shadow: inset 3px 3px 3px #222327, inset -3px -3px 3px #363636;
+      --inner-shadow-0: inset 0 0 0 #222327, inset 0 0 0 #363636;
+    }
+
+    body {
+      font-size: 16px;
+      line-height: 1.5;
+      overflow-x: hidden;
+      background-color: var(--bg-black-50);
+    }
+
+    body.hidden-scrolling {
+      overflow-y: hidden;
+    }
+
+    *:not(i) {
+      font-family: "Raleway", sans-serif;
+      font-weight: 400;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    ::before,
+    ::after {
+      box-sizing: border-box;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      vertical-align: middle;
+      max-width: 100%;
+    }
+
+    .container {
+      max-width: 1350px;
+      /* background-color: red; */
+      margin: 9px;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .justify-content-between {
+      justify-content: space-between;
+    }
+
+    .outer-shadow {
+      box-shadow: var(--outer-shadow);
+    }
+
+    .inner-shadow {
+      box-shadow: var(--inner-shadow);
+    }
+
+    .hover-in-shadow {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hover-in-shadow:hover {
+      box-shadow: var(--outer-shadow-0);
+    }
+
+    .hover-in-shadow:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .hover-in-shadow:hover:after {
+      box-shadow: var(--inner-shadow);
+    }
+
+    .align-items-center {
+      align-items: center;
+    }
+
+    .btn-1 {
+      padding: 10px 25px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--skin-color-1);
+      background-color: transparent;
+      line-height: 1.5;
+      cursor: pointer;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      display: inline-block;
+      border: none;
+    }
+
+    .btn-1::after {
+      border-radius: 30px;
+    }
+
+    .effect-wrap .effect {
+      position: absolute;
+      z-index: -1;
+    }
+
+    .effect-1 {
+      width: 30px;
+      height: 30px;
+      border: 4px solid #8a49ff;
+      right: 10%;
+      bottom: 10%;
+      animation: spin 10s linear infinite;
+    }
+
+    .effect-2 {
+      left: 3%;
+      bottom: 20%;
+      width: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      animation: topBounce 3s ease-in-out infinite;
+    }
+
+    .effect-2 div {
+      height: 3px;
+      width: 3px;
+      background-color: #ff9c07;
+      margin: 0 3px 8px;
+    }
+
+    .effect-3 {
+      height: 180px;
+      width: 180px;
+      border: 25px solid var(--skin-color-1);
+      border-radius: 50%;
+      left: 50%;
+      top: -120px;
+      animation: leftBounce 3s ease-in-out infinite;
+    }
+
+    .effect-4 {
+      border-top: 30px solid transparent;
+      border-left: 30px solid #06d79c;
+      left: 30%;
+      top: 20%;
+      animation: spin 15s linear infinite;
+    }
+
+    .effect-4::before {
+      content: "";
+      border-top: 30px solid transparent;
+      border-left: 30px solid #06d79c;
+      position: absolute;
+      opacity: 0.5;
+      left: -35px;
+      top: -25px;
+    }
+
+    .effect-5 {
+      height: 50px;
+      width: 50px;
+      right: 10%;
+      top: 30%;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 50%;
+      overflow: hidden;
+      animation: spin 10s linear infinite;
+    }
+
+    .effect-5 div {
+      width: 1px;
+      height: 100%;
+      background-color: #4dd0e1;
+    }
+
+    /* --------------------- Animation Starts ------------------------ */
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes topBounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(25px);
+      }
+    }
+
+    @keyframes leftBounce {
+
+      0%,
+      100% {
+        transform: translateY(x);
+      }
+
+      50% {
+        transform: translatex(25px);
+      }
+    }
+
+    @keyframes fadeInTop {
+      0% {
+        opacity: 0;
+        transform: translateY(-25px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0px);
+      }
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes loaderAni {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-30px)
+      }
+    }
+
+    @keyframes status {
+      0% {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      90% {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      100% {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    /* --------------------- Animation Ends ------------------------ */
+
+    .section-title {
+      /* background-color: red; */
+      padding: 0 15px;
+      flex: 0 0 100%;
+      max-width: 100%;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      /* background-color: blue; */
+      display: inline-block;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--text-black-900);
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .section-title h2::before {
+      content: attr(data-heading);
+      display: block;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--skin-color-1);
+    }
+
+    /* --------------------- Item Linking Starts ------------------------ */
+
+    .section.hide {
+      display: none;
+    }
+
+    /* --------------------- Item Linking Ends ------------------------ */
+
+    /* ----------------
+Globals Ends
+---------------- */
+
+    body,
+    html {
+      width: 100%;
+      height: 100%;
+    }
+
+    .new {
+      margin: 0;
+      padding: 0;
+      background-image: url("https://www.teahub.io/photos/full/73-737926_wallpaper-pink-blue-gradient-linear-light-sky-blue.jpg");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+    }
+
+    .bubbles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      width: 40px;
+      height: 40px;
+      /* background:#f1f1f1; */
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: rise 5s infinite cubic-bezier(0.36, 4.22, 0, -1.79);
+    }
+
+    .bubble:nth-child(1) {
+      width: 40px;
+      height: 40px;
+      left: 10%;
+      background: rgba(252, 252, 55, 0.673);
+      animation-duration: 8s;
+    }
+
+    .bubble:nth-child(2) {
+      width: 20px;
+      height: 20px;
+      left: 20%;
+      background: rgba(255, 255, 255, 0.672);
+      animation-duration: 5s;
+      animation-delay: 1s;
+    }
+
+    .bubble:nth-child(3) {
+      width: 50px;
+      height: 50px;
+      left: 35%;
+      background: pink;
+      animation-duration: 7s;
+      animation-delay: 2s;
+    }
+
+    .bubble:nth-child(4) {
+      width: 80px;
+      height: 80px;
+      left: 50%;
+      background: rgba(78, 192, 214, 0.557);
+      animation-duration: 11s;
+      animation-delay: 0s;
+    }
+
+    .bubble:nth-child(5) {
+      width: 35px;
+      height: 35px;
+      left: 55%;
+      background: rgba(197, 115, 115, 0.491);
+      animation-duration: 6s;
+      animation-delay: 1s;
+    }
+
+    .bubble:nth-child(6) {
+      width: 45px;
+      height: 45px;
+      left: 65%;
+      background: rgba(252, 252, 55, 0.673);
+      animation-duration: 8s;
+      animation-delay: 3s;
+    }
+
+    .bubble:nth-child(7) {
+      width: 90px;
+      height: 90px;
+      left: 70%;
+      background: rgba(0, 225, 255, 0.638);
+      animation-duration: 12s;
+      animation-delay: 2s;
+    }
+
+    .bubble:nth-child(8) {
+      width: 25px;
+      height: 25px;
+      left: 80%;
+      background: pink;
+      animation-duration: 6s;
+      animation-delay: 2s;
+    }
+
+    .bubble:nth-child(9) {
+      width: 15px;
+      height: 15px;
+      left: 70%;
+      background: rgba(245, 245, 245, 0.671);
+      animation-duration: 5s;
+      animation-delay: 1s;
+    }
+
+    .bubble:nth-child(10) {
+      width: 90px;
+      height: 90px;
+      left: 25%;
+      background: rgba(250, 235, 215, 0.672);
+      animation-duration: 10s;
+      animation-delay: 4s;
+    }
+
+    .mo {
+      width: 90%;
+      height: 90%;
+      margin-left: 5%;
+      margin-top: 0%;
+      background-color: rgba(240, 248, 255, 0.391);
+      border-radius: 45px;
+    }
+
+    .na {
+      color: #000000;
+      border-radius: 176px;
+      margin-left: 20px;
+    }
+
+    .overlay {
+      height: 0%;
+      width: 100%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: rgb(0, 0, 0);
+      background-color: rgb(255 255 255 / 70%);
+      overflow-y: hidden;
+      transition: 0.5s;
+    }
+
+    .overlay-content {
+      position: relative;
+      top: 25%;
+      width: 100%;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .overlay a {
+      padding: 8px;
+      text-decoration: none;
+      font-size: 36px;
+      color: black;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .overlay a:hover,
+    .overlay a:focus {
+      color: grey;
+    }
+
+    .overlay .closebtn {
+      position: absolute;
+      top: 20px;
+      right: 45px;
+      font-size: 60px;
+    }
+
+    @media screen and (max-height: 450px) {
+      .overlay {
+        overflow-y: auto;
+      }
+
+      .overlay a {
+        font-size: 20px
+      }
+
+      .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+      }
+    }
+
+
+    @keyframes rise {
+      0% {
+        bottom: -100px;
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translate(100px);
+      }
+
+      100% {
+        bottom: 1080px;
+        transform: translateX(-200px);
+      }
+    }
+  </style>
+</head>
+
+<body class="new">
+
+  <section class="sticky">
+    <div class="bubbles">
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+    </div>
+  </section>
+
+  <div class="pp">
+    <div id="myNav" class="overlay">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <div class="overlay-content">
+        <a href="{% url 'home' %}"><b>Home</a>
+        <a href="{% url 'about' %}">About Me</a>
+        <a href="{% url 'work' %}">Recent Work</a>
+        <a href="{% url 'call' %}">Contact Me</b></a>
+      </div>
+    </div>
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()" class="na">&#9776;</span>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  <script>
+    function openNav() {
+      document.getElementById("myNav").style.height = "100%";
+    }
+
+    function closeNav() {
+      document.getElementById("myNav").style.height = "0%";
+    }
+
+  </script>
+  </div>
+
+
+</body>
+{% block content %}
+
+
+{% endblock content %}
+
+</html>
